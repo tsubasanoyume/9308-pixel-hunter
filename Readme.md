@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Лена Лебедева](https://up.htmlacademy.ru/ecmascript/2/user/9308).
-* Наставник: [Евгений Воронин].
+* Наставник: [Евгений Воронин](https://htmlacademy.ru/profile/id245996).
 
 ---
 
