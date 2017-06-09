@@ -1,4 +1,4 @@
-const main = document.querySelector(`body`);
+const main = document.querySelector(`div#main`);
 
 const changeScreen = (screen) => {
   main.innerHTML = ``;

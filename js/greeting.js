@@ -1,4 +1,6 @@
 import getScreenElement from './getScreenElement';
+import changeScreen from './renderScreen';
+import rulesElement from './rules';
 
 const templateGreetingString = `<div class="greeting central--blur">
     <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
@@ -25,5 +27,12 @@ const templateGreetingString = `<div class="greeting central--blur">
   </footer>`;
 
 const greetingElement = getScreenElement(templateGreetingString);
+
+const rightArrow = greetingElement.querySelector(`.greeting__continue`);
+
+rightArrow.onclick = (e) => {
+  e.preventDefault();
+  changeScreen(rulesElement);
+};
 
 export default greetingElement;

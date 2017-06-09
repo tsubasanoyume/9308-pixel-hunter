@@ -1,4 +1,6 @@
 import getScreenElement from './getScreenElement';
+import gameOneElement from './game-1';
+import changeScreen from './renderScreen';
 
 const templateRulesString = `<header class="header">
     <div class="header__back">
@@ -36,5 +38,18 @@ const templateRulesString = `<header class="header">
   </footer>`;
 
 const rulesElement = getScreenElement(templateRulesString);
+
+const inputName = rulesElement.querySelector(`.rules__input`);
+const submitBtn = rulesElement.querySelector(`.rules__button`);
+
+inputName.oninput = () => {
+  if (inputName.value !== ``) {
+    submitBtn.disabled = false;
+    submitBtn.onclick = (e) => {
+      e.preventDefault();
+      changeScreen(gameOneElement);
+    };
+  }
+};
 
 export default rulesElement;

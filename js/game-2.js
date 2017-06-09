@@ -1,4 +1,6 @@
 import getScreenElement from './getScreenElement';
+import changeScreen from './renderScreen';
+import gameThreeElement from './game-3';
 
 const templateGameTwoString = `<header class="header">
     <div class="header__back">
@@ -56,5 +58,13 @@ const templateGameTwoString = `<header class="header">
   </footer>`;
 
 const gameTwoElement = getScreenElement(templateGameTwoString);
+
+const gameContainer = gameTwoElement.querySelector(`.game__content`);
+
+gameContainer.onclick = (e) => {
+  if (e.target.name === `question1`) {
+    changeScreen(gameThreeElement);
+  }
+};
 
 export default gameTwoElement;

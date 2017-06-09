@@ -1,4 +1,6 @@
 import getScreenElement from './getScreenElement';
+import changeScreen from './renderScreen';
+import statsElement from './stats';
 
 const templateGameThreeString = `<header class="header">
     <div class="header__back">
@@ -54,5 +56,13 @@ const templateGameThreeString = `<header class="header">
   </footer>`;
 
 const gameThreeElement = getScreenElement(templateGameThreeString);
+
+const gameContainer = gameThreeElement.querySelector(`.game__content`);
+
+gameContainer.onclick = (e) => {
+  if (e.target.classList.contains(`game__option`)) {
+    changeScreen(statsElement);
+  }
+};
 
 export default gameThreeElement;

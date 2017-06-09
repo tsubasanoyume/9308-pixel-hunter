@@ -1,4 +1,6 @@
 import getScreenElement from './getScreenElement';
+import changeScreen from './renderScreen';
+import gameTwoElement from './game-2';
 
 const templateGameOneString = `<header class="header">
     <div class="header__back">
@@ -67,5 +69,14 @@ const templateGameOneString = `<header class="header">
   </footer>`;
 
 const gameOneElement = getScreenElement(templateGameOneString);
+
+const gameContainer = gameOneElement.querySelector(`.game__content`);
+
+gameContainer.onclick = () => {
+  const checkedAnswers = document.querySelectorAll(`input[type=radio]:checked`);
+  if (checkedAnswers.length === 2) {
+    changeScreen(gameTwoElement);
+  }
+};
 
 export default gameOneElement;
