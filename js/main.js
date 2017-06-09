@@ -1,54 +1,69 @@
-const screens = document.querySelectorAll(`template`);
-const main = document.querySelector(`main.central`);
-const screensArr = [];
-const RIGHT = 39;
-const LEFT = 37;
+import introMainElement from './intro';
+import greetingElement from './greeting';
+import rulesElement from './rules';
+import gameOneElement from './game-1';
+import gameTwoElement from './game-2';
+import gameThreeElement from './game-3';
+import statsElement from './stats';
+import changeScreen from './renderScreen';
 
-screens.forEach((el, i, arr) => {
-  switch (arr[i].id) {
-    case `greeting`:
-      screensArr[0] = arr[i];
-      break;
-    case `rules`:
-      screensArr[1] = arr[i];
-      break;
-    case `game-1`:
-      screensArr[2] = arr[i];
-      break;
-    case `game-2`:
-      screensArr[3] = arr[i];
-      break;
-    case `game-3`:
-      screensArr[4] = arr[i];
-      break;
-    case `stats`:
-      screensArr[5] = arr[i];
-      break;
-  }
-});
+changeScreen(introMainElement);
 
-const changeScreen = (currentScreen) => {
-  if (screensArr[currentScreen].innerHTML) {
-    main.innerHTML = ``;
-    main.innerHTML = screensArr[currentScreen].innerHTML;
-  }
-
-};
-
-let currentScreen = 0;
-
-changeScreen(currentScreen);
-
-document.onkeydown = (evt) => {
-  if ((evt.altKey) && (evt.keyCode === RIGHT)) {
-    evt.preventDefault();
-    if (currentScreen >= 0 && currentScreen < screensArr.length - 1) {
-      changeScreen(++currentScreen);
-    }
-  } else if ((evt.altKey) && (evt.keyCode === LEFT)) {
-    evt.preventDefault();
-    if (currentScreen > 0 && currentScreen < screensArr.length) {
-      changeScreen(--currentScreen);
-    }
+document.onclick = (event) => {
+  if (event.target.parentNode.classList.contains(`back`)) {
+    changeScreen(greetingElement);
   }
 };
+
+const star = document.querySelector(`.intro__asterisk`);
+
+star.onclick = (e) => {
+  e.preventDefault();
+  changeScreen(greetingElement);
+
+  const rightArrow = document.querySelector(`.greeting__continue`);
+
+  rightArrow.onclick = (ev) => {
+    ev.preventDefault();
+    changeScreen(rulesElement);
+
+    const inputName = document.querySelector(`.rules__input`);
+    const submitBtn = document.querySelector(`.rules__button`);
+
+    inputName.oninput = () => {
+      if (inputName.value !== ``) {
+        submitBtn.disabled = false;
+        submitBtn.onclick = (evt) => {
+          evt.preventDefault();
+          changeScreen(gameOneElement);
+
+          const gameCont = document.querySelector(`.game__content`);
+
+          gameCont.onclick = () => {
+            const checkedAnswers = document.querySelectorAll(`input[type=radio]:checked`);
+            if (checkedAnswers.length === 2) {
+              changeScreen(gameTwoElement);
+              const gameCont1 = document.querySelector(`.game__content`);
+
+              gameCont1.onclick = (event) => {
+                if (event.target.name === `question1`) {
+                  changeScreen(gameThreeElement);
+
+                  const gameCont2 = document.querySelector(`.game__content`);
+
+                  gameCont2.onclick = (evnt) => {
+                    if (evnt.target.classList.contains(`game__option`)) {
+                      changeScreen(statsElement);
+                    }
+                  };
+                }
+              };
+            }
+          };
+        };
+      }
+    };
+  };
+};
+
+
