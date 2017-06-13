@@ -1,4 +1,5 @@
 import getScreenElement from './getScreenElement';
+import {templateFooterString as footer} from './footer';
 import changeScreen from './renderScreen';
 import greetingElement from './greeting';
 
@@ -7,7 +8,8 @@ const templateIntroString = `<div id="main" class="central__content">
       <h1 class="intro__asterisk">*</h1>
       <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
     </div>
-  </div>`;
+  </div>
+  ${footer}`;
 
 const introMainElement = getScreenElement(templateIntroString);
 
