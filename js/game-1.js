@@ -3,47 +3,36 @@ import changeScreen from './renderScreen';
 import gameTwoElement from './game-2';
 import {templateFooterString as footer} from './footer';
 import templateHeader from './header';
+import {defaultState as data} from './data';
+import {levels as levels} from './data';
+import {stats as stats} from './data';
 
-const templateGameOneString = `
-  ${templateHeader(true)}
-  <div class="game">
-    <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
-    <form class="game__content">
-      <div class="game__option">
-        <img src="http://placehold.it/468x458" alt="Option 1" width="468" height="458">
+const answerCont = `
+      ${[...levels[data.level].answers].map((answer, i) =>
+        `<div class="game__option">
+        <img src="${answer}" alt="Option 1" width="468" height="458">
         <label class="game__answer game__answer--photo">
-          <input name="question1" type="radio" value="photo">
+          <input name="question${i}" type="radio" value="photo">
           <span>Фото</span>
         </label>
         <label class="game__answer game__answer--paint">
-          <input name="question1" type="radio" value="paint">
+          <input name="question${i}" type="radio" value="paint">
           <span>Рисунок</span>
         </label>
-      </div>
-      <div class="game__option">
-        <img src="http://placehold.it/468x458" alt="Option 2" width="468" height="458">
-        <label class="game__answer  game__answer--photo">
-          <input name="question2" type="radio" value="photo">
-          <span>Фото</span>
-        </label>
-        <label class="game__answer  game__answer--paint">
-          <input name="question2" type="radio" value="paint">
-          <span>Рисунок</span>
-        </label>
-      </div>
+        </div>`).join(``)}`;
+
+const statsLvl = `${[...stats.values()].map((status) => `<li class="stats__result stats__result--${status}"></li>`).join(``) }`;
+
+const templateGameOneString = `
+  ${templateHeader(data)}
+  <div class="game">
+    <p class="game__task">${levels[data.level].question}</p>
+    <form class="game__content">
+      ${answerCont}
     </form>
     <div class="stats">
       <ul class="stats">
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--correct"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--unknown"></li>
+        ${statsLvl}
       </ul>
     </div>
   </div>

@@ -1,9 +1,14 @@
-const templateHeader = (isGameScreen) => {
-  const gameState = (isGameScreen) ? `<h1 class="game__timer">NN</h1>
+const templateHeader = (data) => {
+  const gameState = (data) ? `
+    <h1 class="game__timer"> ${data.time} </h1>
     <div class="game__lives">
-      <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
-      <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-      <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
+    
+    ${new Array(3 - data.lives)
+      .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)
+      .join(``)}
+    ${new Array(data.lives)
+      .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`)
+      .join(``)}
     </div>` : ``;
 
   return `<header class="header">
