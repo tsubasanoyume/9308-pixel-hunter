@@ -1,11 +1,11 @@
 const setLives = (isSetLive) => {
-  const live = (isSetLive) ? `full` : `empty`;
+  const live = isSetLive ? `full` : `empty`;
 
   return `<img src="img/heart__${live}.svg" class="game__heart" alt="Life" width="32" height="32">`;
 };
 
 const templateHeader = (data) => {
-  const gameState = (data) ? `
+  const gameState = data ? `
     <h1 class="game__timer"> ${data.time} </h1>
     <div class="game__lives">
     
