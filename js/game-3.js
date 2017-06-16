@@ -3,34 +3,28 @@ import changeScreen from './renderScreen';
 import statsElement from './stats';
 import {templateFooterString as footer} from './footer';
 import templateHeader from './header';
+import {defaultState as data} from './data';
+import {levels as levels} from './data';
+import {stats as stats} from './data';
+
+const answerCont = `
+      ${levels[`3`].answers.map((answer) =>
+      `<div class="game__option">
+        <img src="${answer}" alt="Option 1" width="304" height="455">
+      </div>`).join(``)}`;
+
+const statsLvl = Array.from(stats.values(), (status) => `<li class="stats__result stats__result--${status}"></li>`).join(``);
 
 const templateGameThreeString = `
-  ${templateHeader(true)}
+  ${templateHeader(data)}
   <div class="game">
-    <p class="game__task">Найдите рисунок среди изображений</p>
+    <p class="game__task">${levels[`3`].question}</p>
     <form class="game__content  game__content--triple">
-      <div class="game__option">
-        <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-      </div>
-      <div class="game__option  game__option--selected">
-        <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-      </div>
-      <div class="game__option">
-        <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-      </div>
+      ${answerCont}
     </form>
     <div class="stats">
       <ul class="stats">
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--correct"></li>
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--unknown"></li>
+        ${statsLvl}
       </ul>
     </div>
   </div>
