@@ -1,5 +1,5 @@
 export const defaultState = Object.freeze({
-  lives: 3,
+  lives: 1,
   time: 0,
   level: `1`
 });

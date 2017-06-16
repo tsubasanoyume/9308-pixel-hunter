@@ -8,12 +8,12 @@ import {levels as levels} from './data';
 import {stats as stats} from './data';
 
 const answerCont = `
-      ${[...levels[`3`].answers].map((answer) =>
+      ${levels[`3`].answers.map((answer) =>
       `<div class="game__option">
         <img src="${answer}" alt="Option 1" width="304" height="455">
       </div>`).join(``)}`;
 
-const statsLvl = `${[...stats.values()].map((status) => `<li class="stats__result stats__result--${status}"></li>`).join(``) }`;
+const statsLvl = Array.from(stats.values(), (status) => `<li class="stats__result stats__result--${status}"></li>`).join(``);
 
 const templateGameThreeString = `
   ${templateHeader(data)}
