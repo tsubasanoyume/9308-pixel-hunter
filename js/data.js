@@ -1,25 +1,25 @@
 export const defaultState = Object.freeze({
   lives: 3,
-  level: `1`,
+  level: 1,
   points: 0,
   time: 30
 });
 
 export const levels = Object.freeze({
-  '1': {
+  'state-1': {
     question: `Угадайте для каждого изображения фото или рисунок?`,
     answers: [
       `http://i.imgur.com/1KegWPz.jpg`,
       `https://k42.kn3.net/CF42609C8.jpg`
     ]
   },
-  '2': {
+  'state-2': {
     question: `Угадай, фото или рисунок?`,
     answers: [
       `https://k32.kn3.net/5C7060EC5.jpg`
     ]
   },
-  '3': {
+  'state-3': {
     question: `Найдите рисунок среди изображений`,
     answers: [
       `http://i.imgur.com/1KegWPz.jpg`,
@@ -64,10 +64,14 @@ export const setTime = (state) => {
 };
 
 export const getLevelData = (level) => {
-  return levels[level];
+  return levels[`state-${level}`];
 };
 
 export const setLevel = (state) => {
+  if (!getLevelData(state.level + 1)) {
+    throw new RangeError(`Level doesn't exist`);
+  }
+
   const newState = Object.assign({}, state);
   newState.level = state.level + 1;
   return newState;
