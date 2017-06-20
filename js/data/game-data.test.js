@@ -1,9 +1,23 @@
 import assert from 'assert';
+import {defaultState, setLives, setPoints} from '../data';
 
-describe(`Array`, () => {
-  describe(`#indexOf()`, () => {
-    it(`should return -1 when the value is not present`, () => {
-      assert.equal(-1, [1, 2, 3].indexOf(4));
+describe(`PixelHunter Game`, () => {
+  describe(`Change Lives`, () => {
+    it(`should update lives`, () => {
+      assert(1, setLives(defaultState, 1).lives);
+      assert(3, defaultState.lives);
+    });
+
+    it(`shouldn't allow set negative lives`, () => {
+      const setNegativesLives = () => {
+        setLives(defaultState, -1);
+      };
+
+      assert.throws(setNegativesLives);
+    });
+
+    it(`should have three lives on start`, () => {
+      assert.equal(defaultState.lives, 3);
     });
   });
 });

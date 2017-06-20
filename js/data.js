@@ -1,7 +1,8 @@
 export const defaultState = Object.freeze({
-  lives: 1,
-  time: 0,
-  level: `1`
+  lives: 3,
+  level: `1`,
+  points: 0,
+  time: 30
 });
 
 export const levels = Object.freeze({
@@ -42,3 +43,32 @@ export const stats = new Map([
   [9, `unknown`],
   [10, `unknown`]
 ]);
+
+export const setLives = (game, lives) => {
+  if (lives < 0) {
+    throw new RangeError(`Can't set negative lives`);
+  }
+  const newGame = Object.assign({}, game);
+  newGame.lives = lives;
+  return newGame;
+};
+
+export const setTime = (state) => {
+  if (state.time === 0) {
+    setLives(state, state.lives - 1);
+  }
+
+  const newState = Object.assign({}, state);
+  newState.time--;
+  return newState;
+};
+
+export const getLevelData = (level) => {
+  return levels[level];
+};
+
+export const setLevel = (state) => {
+  const newState = Object.assign({}, state);
+  newState.level = state.level + 1;
+  return newState;
+};
