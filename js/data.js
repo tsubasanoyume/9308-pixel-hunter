@@ -29,7 +29,7 @@ export const levels = Object.freeze({
   }
 });
 
-export const status = new Set([`unknown`, `wrong`, `correct`, `slow`, `fast`, `heart`]);
+export const status = new Set([`unknown`, `wrong`, `correct`, `slow`, `fast`]);
 
 export const stats = new Map([
   [1, `unknown`],
@@ -63,6 +63,12 @@ export const setTime = (state) => {
   return newState;
 };
 
+export const setPoints = (state, points) => {
+  const newState = Object.assign({}, state);
+  newState.points += points;
+  return newState;
+};
+
 export const getLevelData = (level) => {
   return levels[`state-${level}`];
 };
@@ -75,4 +81,27 @@ export const setLevel = (state) => {
   const newState = Object.assign({}, state);
   newState.level = state.level + 1;
   return newState;
+};
+
+export const setStatus = (state, result) => {
+  stats.set(state.level, result);
+};
+
+export const onAnswer = (state, result) => {
+  if (result === `wrong`) {
+    setLives(state, state.lives - 1);
+    setStatus(state, result);
+  }
+
+  if (result === `correct`) {
+    setStatus(state, result);
+    setPoints(state, 100);
+    if (state.time < 10) {
+      setStatus(state, `fast`);
+      setPoints(state, 50);
+    } else if (state.time > 20) {
+      setStatus(state, `slow`);
+      setPoints(state, -50);
+    }
+  }
 };
